@@ -83,7 +83,7 @@
     UIColor *labelColor = nil;
     UIColor *selectedLabelColor = nil;
     NSDictionary *tabsStyle = props[@"style"];
-    NSDictionary *overlayConfig = props[@"overlay"];
+    NSDictionary *tabOverlayConfig = props[@"tabOverlay"];
 
     if (tabsStyle) {
         NSString *tabBarButtonColor = tabsStyle[@"tabBarButtonColor"];
@@ -204,12 +204,12 @@
     }
     
     //render overlay
-    if (overlayConfig) {
+    if (tabOverlayConfig) {
         RCTRootView *overlayView = [[RCTRootView alloc] initWithBridge:bridge
-                                                            moduleName:overlayConfig[@"screen"]
-                                                     initialProperties:overlayConfig[@"passProps"]];
+                                                            moduleName:tabOverlayConfig[@"screen"]
+                                                     initialProperties:tabOverlayConfig[@"passProps"]];
 
-        id overlayPositions = overlayConfig[@"position"];
+        id overlayPositions = tabOverlayConfig[@"position"];
         id leftInset = overlayPositions[@"left"];
         id topInset = overlayPositions[@"top"];
         id heightInset = overlayPositions[@"height"];
@@ -222,7 +222,7 @@
 
         overlayView.frame = CGRectMake(left, top, width, height);
         overlayView.backgroundColor = UIColor.clearColor;
-        [self.view addSubview:overlayView];
+        [self.tabBar addSubview:overlayView];
     }
 
     // replace the tabs
